@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Menu Items{% endblock %}
+{% load static %}
+    {% block content %}
+    <div class="header">
+        <h1>Menu Items</h1>
+        <form method="POST" class="Search-bar">
+        {% csrf_token %}    
+         <input type="text" id="search-input" placeholder="Search...">
+        <button type="button" onclick="searchProduct()">Search</button>
+    </form>
+        <div class="inner-div">
+          <Button ><a href="{% url 'menu_list' %}">Go to The Menu page</a></Button>
+          <Button ><a href="{% url 'customers_list' %}">Go to The Customer Page</a></Button>
+          <Button ><a href="{% url 'order_list' %}">Go to The Orders page</a></Button>
+        </div>
+    </div>
+        
+    
+    
+    <table style="width: 95% !important;" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in menu_items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>${{ item.price }}</td>
+                <td>{{ item.description }}</td>
+                <td>
+                    <button><a href="{% url 'delete_item' item.id %}">Delete</a></button>
+                    <button><a href="{% url 'update_item' item.id %}">Update</a></button></td>
+                </td>
+                
+            </tr>
+
+        {% endfor %}
+
+    </table>
+    <button ><a href="{% url 'add_item' %}">Add Menu Item</a></button>
+
+    <div id="message-box">
+        <h2>Results</h2>
+        <div id="message-content"></div>
+        <button onclick="closeMessage()">Close</button>
+    </div>
+{% endblock %}

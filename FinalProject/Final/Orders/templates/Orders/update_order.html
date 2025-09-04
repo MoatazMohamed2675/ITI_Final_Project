@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Update Order Item{% endblock %}
+{% load static %}
+
+{% block content %}
+   <div class="header">
+        <h1>Update Order Item</h1>
+        <Button ><a href="{% url 'menu_list' %}">Go to The Menu page</a></Button>
+        <Button ><a href="{% url 'customers_list' %}">Go to The Customer Page</a></Button>
+        <Button ><a href="{% url 'order_list' %}">Go to The Orders page</a></Button>
+    </div>
+   
+    <form method="POST">
+    {% csrf_token %}
+
+    <div>
+        <label for="customer_name">Customer Name:</label>
+        <input type="text" id="customer_name" name="customer_name" value="{{ order.customer_name }}" required>
+    </div>
+
+    <div>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" value="{{ order.phone }}" required>
+    </div>
+
+    <hr>
+
+    <h1>Order Items</h1>
+   {% for item in menu_items %}
+        <div>
+            {{ item.name }} - ${{ item.price }}
+            <input type="number" name="quantity_{{ item.id }}" min="0" value="{{ item.existing_qty }}">
+        </div>
+    {% endfor %}
+
+    <br>
+    <button type="submit">Update Order</button>
+</form>
+{% endblock %}

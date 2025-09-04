@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% block title %}Update Menu Item{% endblock %}
+{%load static %}
+{% block content %}
+    <div class="header">
+        <h1>Update Menu Item</h1>
+        <Button ><a href="{% url 'menu_list' %}">Go to The Menu page</a></Button>
+        <Button ><a href="{% url 'customers_list' %}">Go to The Customer Page</a></Button>
+        <Button ><a href="{% url 'order_list' %}">Go to The Orders page</a></Button>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ item.name }}" required><br>
+        </div>
+
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" step="0.5" value="{{ item.price }}" required><br>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required>{{ item.description }}</textarea><br>
+        </div>  
+
+        <button type="submit">Update Item</button>
+    </form>
+{% endblock %}

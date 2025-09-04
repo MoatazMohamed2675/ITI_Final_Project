@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Customers{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="header">
+        <h1>Customers</h1>
+         <div class="inner-div">
+         <Button ><a href="{% url 'menu_list' %}">Go to The Menu page</a></Button>
+         <Button ><a href="{% url 'customers_list' %}">Go to The Customer Page</a></Button>
+         <Button ><a href="{% url 'order_list' %}">Go to The Orders page</a></Button>
+         </div>
+    </div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>
+                <button><a href="{% url 'delete_customer' customer.id %}">Delete</a></button>
+                <button><a href="{% url 'update_customer' customer.id %}">Update</a></button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button><a href="{% url 'add_customer' %}">Add New Customer</a></button>
+{% endblock %}

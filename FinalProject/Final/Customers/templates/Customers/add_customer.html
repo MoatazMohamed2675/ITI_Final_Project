@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Add Customer{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="header">
+        <h1>Add Customer</h1>
+         <div class="inner-div">
+         <Button ><a href="{% url 'menu_list' %}">Go to The Menu page</a></Button>
+         <Button ><a href="{% url 'customers_list' %}">Go to The Customer Page</a></Button>
+         <Button ><a href="{% url 'order_list' %}">Go to The Orders page</a></Button>
+         </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <br>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <br>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
+        </div>
+        <br>
+        <button type="submit">Add Customer</button>
+    </form>
+{% endblock %}
